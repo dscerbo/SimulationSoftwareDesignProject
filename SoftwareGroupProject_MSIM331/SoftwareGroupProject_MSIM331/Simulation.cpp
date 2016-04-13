@@ -2,6 +2,7 @@
 
 // Event List definition
 // Separate from simulation executive to facillitate replacing it
+//Testing purposes
 class SimObj::EventList
 {
 public:
