@@ -1,13 +1,27 @@
 #include "Node.h"
 
-Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int *adjacencyMatrix)
+Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int **adjacencyMatrix, int numVertices, int numEdges)
 {
 	_ID = ID;
+	_numEdges = numEdges; 
+	currentQueue = 0; 
 	_state = idle;
 	_serviceTime = serviceTime;
 	_generationRate = generationRate;
 	_adjacencyMatrix = adjacencyMatrix; 
-
+	_waitTimes = new Time*[numVertices];
+	//Declare wait time array [i][0] is wait time, [i][0] is time when defined
+	for (int i = 0; i < numVertices; ++i) {
+		_waitTimes[i] = new Time[2];
+		_waitTimes[numVertices][0] = _waitTimes[numVertices][1] = 0.0;
+	}
+	//Declare FIFO queue IDs
+	for (int i = 0, int j = 1; i < numVertices; i++) {
+		if (adjacencyMatrix[_ID][i] = 1) {
+			_queues[j] = new FIFO<Message>(_ID);
+			j++;
+		} 
+	}
 }
 
 class Node::ArriveEvent : public Event
@@ -58,10 +72,27 @@ private:
 void Node::Arrive(Message *message)
 {
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Arrive, Entity " << message->GetID() << endl;
-	_queues->AddEntity(message);
-	if ((_state == idle) && (!_serverReserved)) {
+	//Add entity to the correct queue
+	for (int i = 1; i <= _numEdges; i++) {
+		if (_queues[i]->GetID() == message->GetLastNode) {
+			_queues[i]->AddEntity(message);
+			break; 
+		}
+	}
+
+	//Update the newest wait times
+	for (int i = 0; i < _numEdges; i++) {
+		if (message->UpdateNodeWaitTime()[i][1] > _waitTimes[i][1])
+			_waitTimes[i] = message->UpdateNodeWaitTime()[i];
+			_waitTimes[i] = message->UpdateNodeWaitTime()[i];
+	}
+
+	if ((_state == idle)) {
+		for (int i = 0; i <= _numEdges; i++) {
+			if (_queues[i]->IsEmpty() == false)
+				currentQueue = _queues[i]->GetID();
+		}
 		ScheduleEventIn(0, new ServeEvent(this));
-		_serverReserved = true;
 	}
 }
 
@@ -85,22 +116,25 @@ private:
 
 void Node::Serve()
 {
-	Message *message = _queues->GetEntity();
+	Message *message = _queues[currentQueue]->GetEntity();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Entity " << message->GetID() << endl;
 	_state = busy;
-	_serverReserved = false;
 	ScheduleEventIn(_serviceTime->GetRV(), new DepartEvent(this, message));
 }
 
 
-//Depart needs to determine next node to send to
 void Node::Depart(Message *message)
 {
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Depart, Entity " << message->GetID() << endl;
-	_sink->Arrive(message); //Right here
+
+	_sink->Arrive(message); //Determine Next Node
+
 	_state = idle;
-	if (!(_queues->IsEmpty()) && (!_serverReserved)) {
-		ScheduleEventIn(0, new ServeEvent(this));
-		_serverReserved = true;
+	for (int i = 0; i <= _numEdges; i++) {
+		if (!(_queues[currentQueue]->IsEmpty())) {
+			ScheduleEventIn(0, new ServeEvent(this));
+		}
+		currentQueue = (currentQueue + 1) % (_numEdges + 1);
 	}
+	
 }

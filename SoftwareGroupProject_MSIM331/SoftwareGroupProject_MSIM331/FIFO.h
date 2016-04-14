@@ -15,12 +15,12 @@ template <class T>
 class FIFO
 {
 public:
-	FIFO(string name)
+	FIFO(int ID)
 	{
 		_head = 0;
 		_tail = 0;
 		_size = 0;
-		_name = name;
+		_ID = ID;
 	}
 
 	void AddEntity(T *t)
@@ -59,6 +59,7 @@ public:
 
 	bool IsEmpty() { return (_size == 0); }
 	int GetSize() { return _size; }
+	int GetID() { return _ID }; 
 private:
 	struct Node
 	{
@@ -73,7 +74,7 @@ private:
 	Node *_head;
 	Node *_tail;
 	int _size;
-	string _name;
+	int _ID;
 };
 
 #endif

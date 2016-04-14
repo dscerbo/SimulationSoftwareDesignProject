@@ -7,19 +7,22 @@
 class Node : public SimObj
 {
 public:
-	Node(int ID, Distribution *serviceTime, Distribution *generationRate, int *adjacencyMatrix);
+	Node(int ID, Distribution *serviceTime, Distribution *generationRate, int **adjacencyMatrix, int numVertices, int numEdges);
 	void ScheduleArrivalIn(Time deltaT, Message *message);
 	void ScheduleArrivalAt(Time time, Message *message);
+
 private:
 	int _ID;
+	int _numEdges;
 	Distribution *_serviceTime;
 	Distribution *_generationRate;
-	int *_adjacencyMatrix; //Reference to the adjacency matrix. Need to define in the main
-	
+	int **_adjacencyMatrix; //Reference to the adjacency matrix
+	Time **_waitTimes;
+
 	enum ServerState { busy, idle };
 	ServerState _state;
-	FIFO<Message> *_queues;
-	bool _serverReserved;
+	FIFO<Message> **_queues;
+	int currentQueue; 
 	class ArriveEvent;
 	class ServeEvent;
 	class DepartEvent;

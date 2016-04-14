@@ -8,13 +8,19 @@ public:
 	int GetID();
 	Message *New()
 	{
-		return new Message(); 
+		return new Message();
 	}
+	void UpdateMessageWaitTime(Time **waitTimes); 
+	Time **UpdateNodeWaitTime(); 
+	int GetLastNode(); 
+	void UpdateLastNode(int LastNode); 
 	~Message();
 
 private:
+	int _LastNode; 
 	Time TimeSpentWaiting; 
 	Time TimeCreated;
 	int _id;
 	static int _nextID;
+	Time **_waitTimes; 
 };
