@@ -19,22 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="Distribution.h" />
-    <ClInclude Include="Entity.h" />
-=======
->>>>>>> d7f6a5d96c171de46caf9fdc2490db296578a0a6
     <ClInclude Include="FIFO.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Simulation.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="Distribution.cpp" />
-    <ClCompile Include="Entity.cpp" />
-=======
->>>>>>> d7f6a5d96c171de46caf9fdc2490db296578a0a6
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Simulation.cpp" />
