@@ -1,11 +1,13 @@
 #pragma once
+#include "Simulation.h"
 #include "Entity.h"
 
-class Message : public Entity
+class Message
 {
 public:
 	Message();
-	Entity *New()
+	int GetID();
+	Message *New()
 	{
 		return new Message(); 
 	}
@@ -14,7 +16,6 @@ public:
 private:
 	Time TimeSpentWaiting; 
 	Time TimeCreated;
+	int _id;
+	static int _nextID;
 };
-
-
-
