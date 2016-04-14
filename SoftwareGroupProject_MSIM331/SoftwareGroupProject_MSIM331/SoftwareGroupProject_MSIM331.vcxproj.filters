@@ -44,7 +44,11 @@
     <ClCompile Include="Distribution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Main.cpp">
+=======
+    <ClCompile Include="main.cpp">
+>>>>>>> 6ba3f1d21294e692584460668a1f52a5b55bbc67
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
