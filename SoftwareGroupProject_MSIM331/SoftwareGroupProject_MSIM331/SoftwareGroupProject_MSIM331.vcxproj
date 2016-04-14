@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Distribution.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FIFO.h" />
     <ClInclude Include="Message.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="Simulation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Distribution.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="Node.cpp" />
