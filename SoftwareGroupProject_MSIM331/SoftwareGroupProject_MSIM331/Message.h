@@ -1,6 +1,5 @@
 #pragma once
 #include "Simulation.h"
-#include "Entity.h"
 
 class Message
 {
