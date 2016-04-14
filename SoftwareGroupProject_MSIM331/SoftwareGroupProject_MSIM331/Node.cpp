@@ -10,6 +10,59 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 
 }
 
+class Node::Source : public SimObj
+{
+public:
+	Source(int sourceNode, Node *node, Distribution *generation);
+	Source(int sourceNode, Node *node, Distribution *generation, int numMsgs);
+private:
+	class NextMessageEvent;
+	Node* _node;
+	Distribution* _generation;
+	int _sourceNode;
+	void NextMessage();
+	int _numMsgs;
+};
+
+
+class Node::Source::NextMessageEvent : public Event
+{
+public:
+	NextMessageEvent(Source *source) { _source = source; }
+	void Execute()
+	{
+		_source->NextMessage();
+	}
+private:
+	Source *_source;
+};
+
+Node::Source::Source(int sourceNode, Node * node, Distribution * generation)
+{
+	_sourceNode = sourceNode;
+	_node = node;
+	_generation = generation;
+}
+
+Node::Source::Source(int sourceNode, Node *node, Distribution *generation, int numMsgs)
+{
+	_sourceNode = sourceNode;
+	_node = node;
+	_generation = generation;
+	_numMsgs = numMsgs;
+}
+
+void Node::Source::NextMessage()
+{
+	if ((_numMsgs == -1) || (_numMsgs > 0))
+	{
+		if (_numMsgs > 0) _numMsgs--;
+		Message *msg = new Message;
+		_node->ScheduleArrivalIn(0, msg);
+		ScheduleEventIn(_generation->GetRV(), new NextMessageEvent(this));
+	}
+}
+
 class Node::ArriveEvent : public Event
 {
 public:

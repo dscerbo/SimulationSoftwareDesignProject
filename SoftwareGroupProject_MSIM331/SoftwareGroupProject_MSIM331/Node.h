@@ -23,6 +23,7 @@ private:
 	class ArriveEvent;
 	class ServeEvent;
 	class DepartEvent;
+	class Source;
 	void Arrive(Message *message);
 	void Serve();
 
