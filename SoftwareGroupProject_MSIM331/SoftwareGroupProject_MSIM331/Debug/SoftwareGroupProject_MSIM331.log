@@ -1,9 +1,4 @@
-﻿  Simulation.cpp
-  Node.cpp
+﻿  Node.cpp
 c:\users\dominic scerbo\desktop\softwaredeisgngroupproject\simulationsoftwaredesignproject\softwaregroupproject_msim331\softwaregroupproject_msim331\node.cpp(100): error C2065: '_sink': undeclared identifier
 c:\users\dominic scerbo\desktop\softwaredeisgngroupproject\simulationsoftwaredesignproject\softwaregroupproject_msim331\softwaregroupproject_msim331\node.cpp(100): error C2227: left of '->Arrive' must point to class/struct/union/generic type
   c:\users\dominic scerbo\desktop\softwaredeisgngroupproject\simulationsoftwaredesignproject\softwaregroupproject_msim331\softwaregroupproject_msim331\node.cpp(100): note: type is 'unknown-type'
-  Message.cpp
-  main.cpp
-  Distribution.cpp
-  Generating Code...

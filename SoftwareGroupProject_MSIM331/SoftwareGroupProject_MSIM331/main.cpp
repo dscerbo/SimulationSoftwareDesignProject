@@ -8,6 +8,5 @@ int main() {
 	//2D array (its an array to pointers to arrays)
 	int **adjMatrix = new int*[numVertices];
 	for (int i = 0; i < numVertices; ++i)
-		adjMatrix[i] = new int[numVertices]; 
-
+		adjMatrix[i] = new int[numVertices];
 }
