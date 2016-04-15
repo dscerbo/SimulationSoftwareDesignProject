@@ -15,12 +15,16 @@ template <class T>
 class FIFO
 {
 public:
-	FIFO(int ID)
+	FIFO()
 	{
 		_head = 0;
 		_tail = 0;
 		_size = 0;
-		_ID = ID;
+	}
+	
+	void SetID(int ID)
+	{
+		_ID = ID; 
 	}
 
 	void AddEntity(T *t)
@@ -32,9 +36,9 @@ public:
 		else {
 			_tail = _tail->next = node;
 		}
-		cout << GetCurrentSimTime() << ", queue " << _name << ", AddEntity, Entity , queue size, " << _size << endl;
+		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddEntity, Entity , queue size, " << _size << endl;
 		_size++;
-		cout << GetCurrentSimTime() << ", queue " << _name << ", AddEntity, Entity , queue size, " << _size << endl;
+		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddEntity, Entity , queue size, " << _size << endl;
 	}
 
 	T *GetEntity()
@@ -45,9 +49,9 @@ public:
 			T *t = _head->t;
 			_head = _head->next;
 //			delete n;
-			cout << GetCurrentSimTime() << ", queue " << _name << ", GetEntity, Entity , queue size, " << _size << endl;
+			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetEntity, Entity , queue size, " << _size << endl;
 			_size--;
-			cout << GetCurrentSimTime() << ", queue " << _name << ", GetEntity, Entity , queue size, " << _size << endl;
+			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetEntity, Entity , queue size, " << _size << endl;
 			return t;
 		}
 	}
@@ -59,7 +63,7 @@ public:
 
 	bool IsEmpty() { return (_size == 0); }
 	int GetSize() { return _size; }
-	int GetID() { return _ID }; 
+	int GetID() { return _ID; }
 private:
 	struct Node
 	{

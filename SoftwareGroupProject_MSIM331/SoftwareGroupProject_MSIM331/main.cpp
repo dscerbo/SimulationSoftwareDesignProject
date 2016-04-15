@@ -1,18 +1,9 @@
 #include <iostream>
-#include "Distribution.h"
-
-Distribution *Distributor();
-
-using namespace std;
+#include "Node.h"
 
 int main()
 {
-	Distribution *Distribution;
-
-	int numVertices;
-	cout << "Enter # of vertices: ";
-	cin >> numVertices;
-
+	int numVertices = 4;
 	//2D array (its an array to pointers to arrays)
 	int **adjMatrix = new int*[numVertices];
 	for (int i = 0; i < numVertices; ++i)
@@ -27,57 +18,35 @@ int main()
 		}
 	}
 
-	/*
-	1. User enters the number of edges for each node
-	2. User then specifies which node it will be connected ex: [i][user input] = 1
-	*/
-	int numEdges;
-	int edgeName;
-	for (int i = 0; i < numVertices; i++)
-	{
-		cout << "Enter a type of distrbution for node " << i << ": " << endl;
-		Distributor();
-		cout << "Enter the node's # of edges";
-		cin >> numEdges;
-		cout << endl;
-		for (int j = 0; j < numEdges; j++)
-		{
-			cout << "Enter edge to connect ";
-			cin >> edgeName;
-			cout << endl;
-			adjMatrix[i][edgeName] = 1;
-		}
-	}
+	//===Vertex 0===
+	Node *vertex0 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
 
-	for (int i = 0; i < numVertices; i++)
-	{
-		for (int j = 0; j < numVertices; j++)
-		{
-			cout << adjMatrix[i][j];
-		}
-		cout << endl;
-	}
-	cout << endl;
+	//2 edges
+	adjMatrix[0][1] = 1;
+	adjMatrix[0][3] = 1;
 
-	cout << "<enter> to terminate: ";
+	//===Vertex 1===
+	Node *vertex1 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
+
+	//2 edges
+	adjMatrix[1][0] = 1;
+	adjMatrix[0][2] = 1;
+
+	//===Vertex 2===
+	Node *vertex2 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
+
+	//2 edges
+	adjMatrix[2][1] = 1;
+	adjMatrix[2][3] = 1;
+
+	//===Vertex 3===
+	Node *vertex3 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
+
+	//2 edges
+	adjMatrix[3][0] = 1;
+	adjMatrix[3][2] = 1;
+
+	RunSimulation();
+	
 	cin.get();
-	cin.get();
-}
-
-Distribution *Distributor()
-{
-	cout << "1. Exponential(mean)" << endl
-		<< "2. Uniform(min, max)" << endl
-		<< "3. Triangular(min, expected, max)" << endl
-		<< "4. Normal(mean, stdev)" << endl
-		<< "5. Poisson(mean)" << endl
-		<< "6. Constant(mean)" << endl
-		<< "7. Weibull(scale, shape)" << endl
-		<< "8. Erlang(scale, shape)" << endl;
-
-	double a = 0;
-	cout << "Enter the mean of the exponential distribution: ";
-	cin >> a;
-	Distribution *distribution = new Exponential(a);
-	return distribution;
 }

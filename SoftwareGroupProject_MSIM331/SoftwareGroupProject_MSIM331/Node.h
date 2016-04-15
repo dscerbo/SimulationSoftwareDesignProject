@@ -14,21 +14,24 @@ public:
 private:
 	int _ID;
 	int _numEdges;
+	int _numVertices;
 	Distribution *_serviceTime;
 	Distribution *_generationRate;
 	int **_adjacencyMatrix; //Reference to the adjacency matrix
 	Time **_waitTimes;
+	int _numMsgs;
 
 	enum ServerState { busy, idle };
 	ServerState _state;
-	FIFO<Message> **_queues;
+	FIFO<Message> *_queues;
 	int currentQueue; 
 	class ArriveEvent;
 	class ServeEvent;
 	class DepartEvent;
-	class Source;
+	class NextMessageEvent;
 	void Arrive(Message *message);
 	void Serve();
+	void NextMessage();
 
 	//Depart needs to determine next vertex
 	void Depart(Message *message);
