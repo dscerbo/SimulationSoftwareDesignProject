@@ -40,7 +40,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	///_waitTimes = new Time*[numVertices]; 
 	///Not worrying about wait times right now
 
-	_numMsgs = 100; //For now
+	_numMsgs = 1; //For now
 
 	///Declare wait time array [i][0] is wait time, [i][0] is time when defined ---not worrying about waittimes----
 	/*for (int i = 0; i < numVertices; ++i) {
@@ -49,7 +49,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	}*/
 
 	//Declare FIFO queue IDs
-	_queues = new FIFO<Message>[numEdges];
+	_queues = new FIFO<Message>[numEdges + 1];
 	int counter = 1; 
 	_queues[0].SetID(0); //Internal Queue
 	for (int i = 0; i < numVertices; i++) {
@@ -125,10 +125,6 @@ void Node::Arrive(Message *message)
 	}*/
 
 	if ((_state == idle)) {
-		for (int i = 0; i <= _numEdges; i++) {
-			if (_queues[i].IsEmpty() == false)
-				currentQueue = _queues[i].GetID();
-		}
 		ScheduleEventIn(0, new ServeEvent(this));
 	}
 }
@@ -163,6 +159,9 @@ private:
 
 void Node::Serve()
 {
+	while (_queues[currentQueue].IsEmpty() == true) {
+		currentQueue = (currentQueue + 1) % (_numEdges + 1); 
+	}
 	Message *message = _queues[currentQueue].GetEntity();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Entity " << message->GetID() << endl;
 	_state = busy;

@@ -19,32 +19,16 @@ int main()
 	}
 
 	//===Vertex 0===
-	Node *vertex0 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
+	Node *vertex0 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 2, 1);
 
-	//2 edges
+	//1 edge
 	adjMatrix[0][1] = 1;
-	adjMatrix[0][3] = 1;
 
 	//===Vertex 1===
-	Node *vertex1 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
+	Node *vertex1 = new Node(1, new Constant(2.0), new Constant(10.0), adjMatrix, 2, 1);
 
-	//2 edges
+	//1 edge
 	adjMatrix[1][0] = 1;
-	adjMatrix[0][2] = 1;
-
-	//===Vertex 2===
-	Node *vertex2 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
-
-	//2 edges
-	adjMatrix[2][1] = 1;
-	adjMatrix[2][3] = 1;
-
-	//===Vertex 3===
-	Node *vertex3 = new Node(0, new Constant(2.0), new Constant(10.0), adjMatrix, 4, 2);
-
-	//2 edges
-	adjMatrix[3][0] = 1;
-	adjMatrix[3][2] = 1;
 
 	RunSimulation();
 	
