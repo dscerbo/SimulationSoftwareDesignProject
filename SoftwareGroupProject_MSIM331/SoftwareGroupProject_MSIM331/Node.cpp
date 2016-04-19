@@ -1,4 +1,5 @@
 #include "Node.h"
+#include <limits>
 
 class Node::NextMessageEvent : public Event
 {
@@ -37,8 +38,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	_serviceTime = serviceTime;
 	_generationRate = generationRate;
 	_adjacencyMatrix = adjacencyMatrix; 
-	///_waitTimes = new Time*[numVertices]; 
-	///Not worrying about wait times right now
+	_waitTimes = new Time*[numVertices]; 
 
 	_numMsgs = 1; //For now
 
@@ -184,4 +184,34 @@ void Node::Depart(Message *message)
 		currentQueue = (currentQueue + 1) % (_numEdges + 1);
 	}
 	
+}
+
+int Node::DetermineNextNode(Message *message)
+{
+	double *distance = new double[_numVertices];
+	bool *pathFinalized = new bool[_numVertices]; 
+	for (int i = 0; i < _numVertices; i++) {
+		distance[i] = INT_MAX; 
+		pathFinalized[i] = false;
+	}
+
+	distance[_ID] = 0; 
+
+	for (int i = 0; i < _numVertices - 1; i++) {
+		int min = INT_MAX, min_index; 
+		//Determine 
+		for (int j = 0; j < _numVertices; j++) {
+			if (pathFinalized[j] == false && distance[j] <= min)
+				min = distance[j], min_index = j;
+		}
+		pathFinalized[min] = true; 
+		for (int j = 0; j < _numVertices; j++) {
+			if (!pathFinalized[j] && _adjacencyMatrix[min][j] != 0
+				&& distance[min] != INT_MAX
+				&& distance[min] + *_waitTimes[j] < distance[j]) 
+			{
+				distance[j] = distance[min] + *_waitTimes[j];
+			}
+		}
+	}
 }

@@ -14,6 +14,7 @@ public:
 	//Time **UpdateNodeWaitTime(); 
 	int GetLastNode(); 
 	void UpdateLastNode(int LastNode); 
+	int GetDestination();
 	~Message();
 
 private:

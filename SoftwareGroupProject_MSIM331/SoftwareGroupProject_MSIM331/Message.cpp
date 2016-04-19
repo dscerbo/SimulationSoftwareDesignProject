@@ -34,3 +34,7 @@ int Message::GetLastNode() {
 void Message::UpdateLastNode(int LastNode) {
 	_LastNode = LastNode; 
 }
+
+int Message::GetDestination() {
+	return _destination; 
+}

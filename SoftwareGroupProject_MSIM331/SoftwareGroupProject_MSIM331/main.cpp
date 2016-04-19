@@ -3,7 +3,7 @@
 
 int main()
 {
-	int numVertices = 4;
+	int numVertices = 2;
 	//2D array (its an array to pointers to arrays)
 	int **adjMatrix = new int*[numVertices];
 	for (int i = 0; i < numVertices; ++i)

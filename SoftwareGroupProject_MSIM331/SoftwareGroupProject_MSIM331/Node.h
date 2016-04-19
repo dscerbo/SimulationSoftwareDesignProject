@@ -18,7 +18,7 @@ private:
 	Distribution *_serviceTime;
 	Distribution *_generationRate;
 	int **_adjacencyMatrix; //Reference to the adjacency matrix
-	Time **_waitTimes;
+	static Time **_waitTimes;
 	int _numMsgs;
 
 	enum ServerState { busy, idle };
@@ -35,4 +35,5 @@ private:
 
 	//Depart needs to determine next vertex
 	void Depart(Message *message);
+	int DetermineNextNode(Message *message); 
 };
