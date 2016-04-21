@@ -30,6 +30,11 @@ double Uniform::GetRV()
 	return ((_max - _min)*Uniform_0_1() + _min);
 }
 
+double Uniform::GetMean()
+{
+	return (_min + _max) / 2.0;
+}
+
 Triangular::Triangular(double min, double expected, double max) : Distribution()
 {
 	a = min;

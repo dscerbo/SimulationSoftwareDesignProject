@@ -173,8 +173,7 @@ void Node::Depart(Message *message)
 {
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Depart, Entity " << message->GetID() << endl;
 
-	//_sink->Arrive(message); //Determine Next Node
-	
+	//Need to be able to access neighbors
 
 	_state = idle;
 	for (int i = 0; i <= _numEdges; i++) {
@@ -189,29 +188,35 @@ void Node::Depart(Message *message)
 int Node::DetermineNextNode(Message *message)
 {
 	double *distance = new double[_numVertices];
-	bool *pathFinalized = new bool[_numVertices]; 
+	bool *pathFinalized = new bool[_numVertices];
+	int *parent = new int[_numVertices];
 	for (int i = 0; i < _numVertices; i++) {
+		parent[0] = -1;
 		distance[i] = INT_MAX; 
 		pathFinalized[i] = false;
 	}
-
 	distance[_ID] = 0; 
-
 	for (int i = 0; i < _numVertices - 1; i++) {
-		int min = INT_MAX, min_index; 
+		double min = INT_MAX;
+		int min_index; 
 		//Determine 
 		for (int j = 0; j < _numVertices; j++) {
 			if (pathFinalized[j] == false && distance[j] <= min)
 				min = distance[j], min_index = j;
 		}
-		pathFinalized[min] = true; 
+		pathFinalized[min_index] = true;
 		for (int j = 0; j < _numVertices; j++) {
-			if (!pathFinalized[j] && _adjacencyMatrix[min][j] != 0
-				&& distance[min] != INT_MAX
-				&& distance[min] + *_waitTimes[j] < distance[j]) 
+			if (!pathFinalized[j] && _adjacencyMatrix[min_index][j] != 0
+				&& distance[min_index] != INT_MAX
+				&& distance[min_index] + *_waitTimes[j] < distance[j])
 			{
-				distance[j] = distance[min] + *_waitTimes[j];
+				parent[j] = min_index;
+				distance[j] = distance[min_index] + *_waitTimes[j];
 			}
 		}
 	}
+	std::cout << "Message: " << message->GetID() << ", Destination: " << parent[message->GetDestination()] << endl;
+	return parent[message->GetDestination()];
 }
+
+Time** Node::_waitTimes = new Time*[2];

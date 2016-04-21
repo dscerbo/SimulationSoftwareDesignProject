@@ -20,11 +20,12 @@ private:
 	int **_adjacencyMatrix; //Reference to the adjacency matrix
 	static Time **_waitTimes;
 	int _numMsgs;
+	int currentQueue; 
 
 	enum ServerState { busy, idle };
 	ServerState _state;
 	FIFO<Message> *_queues;
-	int currentQueue; 
+
 	class ArriveEvent;
 	class ServeEvent;
 	class DepartEvent;

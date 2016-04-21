@@ -6,6 +6,7 @@ class Distribution
 public:
 	Distribution();
 	virtual double GetRV() = 0;
+	virtual double GetMean() = 0;
 protected:
 	double Uniform_0_1();
 };
@@ -24,6 +25,7 @@ class Uniform : public Distribution
 public:
 	Uniform(double min, double max);
 	double GetRV();
+	double GetMean();
 private:
 	double _min, _max;
 };
