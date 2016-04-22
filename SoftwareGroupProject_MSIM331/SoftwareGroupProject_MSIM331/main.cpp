@@ -30,6 +30,9 @@ int main()
 	//1 edge
 	adjMatrix[1][0] = 1;
 
+	vertex0->SetNeighbor(1, vertex1);
+	vertex1->SetNeighbor(0, vertex0);
+
 	RunSimulation();
 	
 	cin.get();

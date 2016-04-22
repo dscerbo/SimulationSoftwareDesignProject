@@ -61,6 +61,9 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 
 	//Create First entity
 	ScheduleEventIn(0.0, new NextMessageEvent(this));
+
+	neighors = new Node[numVertices];
+
 }
 
 class Node::ArriveEvent : public Event
@@ -101,6 +104,9 @@ private:
 void Node::Arrive(Message *message)
 {
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Arrive, Entity " << message->GetID() << endl;
+	//count nmber of messages and then update current wait time at the node
+	_waitTimes[_ID][0] += _serviceTime->GetMean();
+	_waitTimes[_ID][1] = GetCurrentSimTime(); 
 	//Update last node
 	message->UpdateLastNode(_ID);
 	//Add entity to the correct queue
@@ -168,21 +174,29 @@ void Node::Serve()
 	ScheduleEventIn(_serviceTime->GetRV(), new DepartEvent(this, message));
 }
 
-
 void Node::Depart(Message *message)
 {
-	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Depart, Entity " << message->GetID() << endl;
+	_waitTimes[_ID][0] -= _serviceTime->GetMean();
+	_waitTimes[_ID][1] = GetCurrentSimTime();
 
-	//Need to be able to access neighbors
-
-	_state = idle;
-	for (int i = 0; i <= _numEdges; i++) {
-		if (!(_queues[currentQueue].IsEmpty())) {
-			ScheduleEventIn(0, new ServeEvent(this));
-		}
-		currentQueue = (currentQueue + 1) % (_numEdges + 1);
+	if (message->GetDestination() == _ID) {
+		Sink(message);
 	}
-	
+
+	else
+	{
+		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID() << endl;
+
+		//determine next node
+		
+		_state = idle;
+		for (int i = 0; i <= _numEdges; i++) {
+			if (!(_queues[currentQueue].IsEmpty())) {
+				ScheduleEventIn(0, new ServeEvent(this));
+			}
+			currentQueue = (currentQueue + 1) % (_numEdges + 1);
+		}
+	}
 }
 
 int Node::DetermineNextNode(Message *message)
@@ -220,3 +234,14 @@ int Node::DetermineNextNode(Message *message)
 }
 
 Time** Node::_waitTimes = new Time*[2];
+
+void Node::Sink(Message *message)
+{
+	cout << GetCurrentSimTime() << ", Node " << _ID << ", Sink, Message " << message->GetID() << endl;
+	delete message;
+}
+
+void Node::SetNeighbor(int ID, Node *neighborVertex)
+{
+	neighors[ID] = *neighborVertex;
+}

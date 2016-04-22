@@ -4,11 +4,6 @@
 
 Distribution::Distribution() {}
 
-double Distribution::Uniform_0_1()
-{
-	return (((double)rand()) / (((double)RAND_MAX) + 1.0));
-}
-
 Exponential::Exponential(double mean) : Distribution()
 {
 	_mean = mean;
@@ -17,6 +12,16 @@ Exponential::Exponential(double mean) : Distribution()
 double Exponential::GetRV()
 {
 	return  -_mean*log(Uniform_0_1());
+}
+
+double Exponential::GetMean()
+{
+	return _mean;
+}
+
+double Distribution::Uniform_0_1()
+{
+	return (((double)rand()) / (((double)RAND_MAX) + 1.0));
 }
 
 Uniform::Uniform(double min, double max) : Distribution()
@@ -56,6 +61,11 @@ double Triangular::GetRV()
 	return x;
 }
 
+double Triangular::GetMean()
+{
+	return c;
+}
+
 Normal::Normal(double mean, double stdev)
 {
 	_mean = mean;
@@ -80,6 +90,11 @@ double Normal::GetRV()
 	}
 }
 
+double Normal::GetMean()
+{
+	return _mean;
+}
+
 Poisson::Poisson(double mean)
 {
 	_mean = mean;
@@ -95,12 +110,22 @@ double Poisson::GetRV()
 	return (double)i;
 }
 
+double Poisson::GetMean()
+{
+	return _mean;
+}
+
 Constant::Constant(double mean)
 {
 	_mean = mean;
 }
 
 double Constant::GetRV()
+{
+	return _mean;
+}
+
+double Constant::GetMean()
 {
 	return _mean;
 }
@@ -116,6 +141,11 @@ double Weibull::GetRV()
 	return(_scale*pow(-log(Uniform_0_1()), 1.0 / _shape));
 }
 
+double Weibull::GetMean()
+{
+	return _shape * ((1 / _scale) + 1);
+}
+
 Erlang::Erlang(int scale, double shape)
 {
 	_scale = scale;
@@ -129,4 +159,9 @@ double Erlang::GetRV()
 		rv *= Uniform_0_1();
 	}
 	return -_shape*log(rv);
+}
+
+double Erlang::GetMean()
+{
+	return (_shape / _scale);
 }
