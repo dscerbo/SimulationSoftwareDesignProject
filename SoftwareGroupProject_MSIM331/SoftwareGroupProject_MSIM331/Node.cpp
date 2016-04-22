@@ -210,14 +210,17 @@ void Node::Depart(Message *message)
 
 int Node::DetermineNextNode(Message *message)
 {
+	int tempNodeID = _ID;
+	int tempDestination = message->GetDestination(); 
+
 	double *distance = new double[_numVertices];
 	bool *pathFinalized = new bool[_numVertices];
 	int *parent = new int[_numVertices];
 	for (int i = 0; i < _numVertices; i++) {
-		parent[0] = -1;
 		distance[i] = INT_MAX; 
 		pathFinalized[i] = false;
 	}
+	parent[_ID] = -1;
 	distance[_ID] = 0; 
 	for (int i = 0; i < _numVertices - 1; i++) {
 		double min = INT_MAX;
@@ -238,7 +241,10 @@ int Node::DetermineNextNode(Message *message)
 			}
 		}
 	}
-	
+
+	int tempParent0 = parent[0];
+	int tempParent1 = parent[1];
+	int tempParent2 = parent[2];
 	int nextNode = message->GetDestination();
 	while (parent[parent[nextNode]] != -1) {
 		nextNode = parent[nextNode];
