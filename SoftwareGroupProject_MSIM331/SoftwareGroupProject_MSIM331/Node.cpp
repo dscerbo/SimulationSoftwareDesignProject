@@ -71,7 +71,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	//Create First entity
 	ScheduleEventIn(0.0, new NextMessageEvent(this));
 
-	neighors = new Node[numVertices];
+	neighors = new Node*[numVertices];
 
 }
 
@@ -196,7 +196,7 @@ void Node::Depart(Message *message)
 	{
 		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 
-		neighors[DetermineNextNode(message)].Arrive(message);
+		neighors[DetermineNextNode(message)]->Arrive(message);
 		
 		_state = idle;
 		for (int i = 0; i <= _numEdges; i++) {
@@ -210,9 +210,6 @@ void Node::Depart(Message *message)
 
 int Node::DetermineNextNode(Message *message)
 {
-	int tempNodeID = _ID;
-	int tempDestination = message->GetDestination(); 
-
 	double *distance = new double[_numVertices];
 	bool *pathFinalized = new bool[_numVertices];
 	int *parent = new int[_numVertices];
@@ -264,5 +261,5 @@ void Node::Sink(Message *message)
 
 void Node::SetNeighbor(int ID, Node *neighborVertex)
 {
-	neighors[ID] = *neighborVertex;
+	neighors[ID] = neighborVertex;
 }

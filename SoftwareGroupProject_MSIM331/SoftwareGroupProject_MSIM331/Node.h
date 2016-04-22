@@ -23,7 +23,7 @@ private:
 	static Time **_waitTimes; //[0] is wait time [1] is when time was taken
 	int _numMsgs;
 	int currentQueue; 
-	Node *neighors;
+	Node **neighors;
 
 	enum ServerState { busy, idle };
 	ServerState _state;
