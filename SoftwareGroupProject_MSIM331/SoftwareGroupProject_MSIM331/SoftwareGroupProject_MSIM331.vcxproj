@@ -32,6 +32,9 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4D6A8C0B-C88F-441A-85B3-D4F6B943FE76}</ProjectGuid>
     <RootNamespace>SoftwareGroupProject_MSIM331</RootNamespace>
