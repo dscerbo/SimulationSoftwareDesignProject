@@ -19,10 +19,10 @@ void Node::NextMessage()
 	{
 		if (_numMsgs > 0) 
 			_numMsgs--;
-		int randomNode = (_ID + (rand() % _numVertices - 1)) % _numVertices;
+		int randomNode = (_ID + (rand() % _numVertices - 1) + 1) % _numVertices;
 		Message *msg = new Message(randomNode);
 		msg->UpdateLastNode(-1);
-		cout << GetCurrentSimTime() << ", " << _ID << ", NextEntity, Entity " << msg->GetID() << ", Destination" << randomNode << endl;
+		cout << GetCurrentSimTime() << ", " << _ID << ", NextEntity, Entity " << msg->GetID() << ", Destination " << randomNode << endl;
 		this->ScheduleArrivalIn(0, msg);
 		ScheduleEventIn(_generationRate->GetRV(), new NextMessageEvent(this));
 	}
@@ -39,6 +39,14 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	_generationRate = generationRate;
 	_adjacencyMatrix = adjacencyMatrix; 
 	_waitTimes = new Time*[numVertices]; 
+	for (int i = 0; i < numVertices; i++) {
+		_waitTimes[i] = new Time[numVertices];
+	}
+	for (int i = 0; i < numVertices; i++) {
+		for (int j = 0; j < numVertices; j++) {
+			_waitTimes[i][j] = 0; //Initialize all wait times to 0
+		}
+	}
 
 	_numMsgs = 1; //For now
 
@@ -52,8 +60,9 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	_queues = new FIFO<Message>[numEdges + 1];
 	int counter = 1; 
 	_queues[0].SetID(0); //Internal Queue
+
 	for (int i = 0; i < numVertices; i++) {
-		if (adjacencyMatrix[_ID][i] = 1) {
+		if (adjacencyMatrix[_ID][i] == 1) {
 			_queues[counter].SetID(_ID); //Income Queues
 			counter++;
 		} 
@@ -185,9 +194,9 @@ void Node::Depart(Message *message)
 
 	else
 	{
-		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID() << endl;
+		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 
-		//determine next node
+		neighors[DetermineNextNode(message)].Arrive(message);
 		
 		_state = idle;
 		for (int i = 0; i <= _numEdges; i++) {
@@ -222,15 +231,21 @@ int Node::DetermineNextNode(Message *message)
 		for (int j = 0; j < _numVertices; j++) {
 			if (!pathFinalized[j] && _adjacencyMatrix[min_index][j] != 0
 				&& distance[min_index] != INT_MAX
-				&& distance[min_index] + *_waitTimes[j] < distance[j])
+				&& distance[min_index] + *_waitTimes[j] <= distance[j])
 			{
 				parent[j] = min_index;
 				distance[j] = distance[min_index] + *_waitTimes[j];
 			}
 		}
 	}
-	std::cout << "Message: " << message->GetID() << ", Destination: " << parent[message->GetDestination()] << endl;
-	return parent[message->GetDestination()];
+	
+	int nextNode = message->GetDestination();
+	while (parent[parent[nextNode]] != -1) {
+		nextNode = parent[nextNode];
+	}
+
+	std::cout << ", Destination: " << nextNode << endl;
+	return nextNode;
 }
 
 Time** Node::_waitTimes = new Time*[2];
