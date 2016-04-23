@@ -36,9 +36,9 @@ public:
 		else {
 			_tail = _tail->next = node;
 		}
-		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddEntity, Entity , queue size, " << _size << endl;
+		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddMessage, Message , queue size, " << _size << endl;
 		_size++;
-		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddEntity, Entity , queue size, " << _size << endl;
+		cout << GetCurrentSimTime() << ", queue " << _ID << ", AddMessage, Message , queue size, " << _size << endl;
 	}
 
 	T *GetEntity()
@@ -49,9 +49,9 @@ public:
 			T *t = _head->t;
 			_head = _head->next;
 //			delete n;
-			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetEntity, Entity , queue size, " << _size << endl;
+			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetMessage, Message , queue size, " << _size << endl;
 			_size--;
-			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetEntity, Entity , queue size, " << _size << endl;
+			cout << GetCurrentSimTime() << ", queue " << _ID << ", GetMessage, Message , queue size, " << _size << endl;
 			return t;
 		}
 	}

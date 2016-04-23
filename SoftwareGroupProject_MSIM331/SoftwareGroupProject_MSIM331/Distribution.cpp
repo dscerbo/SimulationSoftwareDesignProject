@@ -4,6 +4,11 @@
 
 Distribution::Distribution() {}
 
+double Distribution::Uniform_0_1()
+{
+	return (((double)rand()) / (((double)RAND_MAX) + 1.0));
+}
+
 Exponential::Exponential(double mean) : Distribution()
 {
 	_mean = mean;
@@ -19,10 +24,7 @@ double Exponential::GetMean()
 	return _mean;
 }
 
-double Distribution::Uniform_0_1()
-{
-	return (((double)rand()) / (((double)RAND_MAX) + 1.0));
-}
+
 
 Uniform::Uniform(double min, double max) : Distribution()
 {

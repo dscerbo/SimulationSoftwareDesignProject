@@ -19,11 +19,12 @@ private:
 	int _numVertices;
 	Distribution *_serviceTime;
 	Distribution *_generationRate;
+	bool _serverReserved;
 	int **_adjacencyMatrix; //Reference to the adjacency matrix
 	static Time **_waitTimes; //[0] is wait time [1] is when time was taken
 	int _numMsgs;
 	int currentQueue; 
-	Node *neighors;
+	Node **neighors;
 
 	enum ServerState { busy, idle };
 	ServerState _state;
