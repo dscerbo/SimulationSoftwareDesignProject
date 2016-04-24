@@ -1,0 +1,21 @@
+Message: 2
+Communication Time: 4
+Wait Time: -6.27744e+66
+Message: 1
+Communication Time: 6
+Wait Time: -6.27744e+66
+Message: 3
+Communication Time: 8
+Wait Time: -6.27744e+66
+Node: 0
+Average Processing Time: 2
+Efficency: 0.6
+Average Wait Time: -6.27744e+66
+Node: 1
+Average Processing Time: 2
+Efficency: 0.6
+Average Wait Time: -6.27744e+66
+Node: 2
+Average Processing Time: 2
+Efficency: 0.4
+Average Wait Time: -6.27744e+66
