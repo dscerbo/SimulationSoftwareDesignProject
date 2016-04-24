@@ -120,6 +120,7 @@ void Node::Arrive(Message *message)
 	//Update last node
 	message->UpdateLastNode(_ID);
 	//Add entity to the correct queue
+	//what is this doing? Does not ever execute
 	if (message->GetLastNode() == -1)
 		_queues[0].AddEntity(message); //Add to Internal Queue
 	else
@@ -194,6 +195,7 @@ void Node::Depart(Message *message)
 	_waitTimes[_ID][1] = GetCurrentSimTime();
 
 	if (message->GetDestination() == _ID) {
+		_state = idle;
 		Sink(message);
 	}
 

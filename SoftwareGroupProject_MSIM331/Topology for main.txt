@@ -64,38 +64,38 @@
 	adjMatrix[9][3] = 1;
 	adjMatrix[9][8] = 1;
 
-	vertex0->SetNeighbor(2, vertex1);
-	vertex0->SetNeighbor(4, vertex3);
+	vertex0->SetNeighbor(2, vertex2);
+	vertex0->SetNeighbor(4, vertex4);
 
-	vertex1->SetNeighbor(1, vertex0);
-	vertex1->SetNeighbor(3, vertex2);
-	vertex1->SetNeighbor(4, vertex3);
-	vertex1->SetNeighbor(5, vertex4);
+	vertex1->SetNeighbor(1, vertex1);
+	vertex1->SetNeighbor(3, vertex3);
+	vertex1->SetNeighbor(4, vertex4);
+	vertex1->SetNeighbor(5, vertex5);
 
-	vertex2->SetNeighbor(2, vertex1);
-	vertex2->SetNeighbor(6, vertex5);
+	vertex2->SetNeighbor(2, vertex2);
+	vertex2->SetNeighbor(6, vertex6);
 	
-	vertex3->SetNeighbor(1, vertex0);
-	vertex3->SetNeighbor(2, vertex1);
-	vertex3->SetNeighbor(10, vertex9);
+	vertex3->SetNeighbor(1, vertex1);
+	vertex3->SetNeighbor(2, vertex2);
+	vertex3->SetNeighbor(10, vertex10);
 
-	vertex4->SetNeighbor(2, vertex1);
-	vertex4->SetNeighbor(6, vertex5);
-	vertex4->SetNeighbor(8, vertex7);
+	vertex4->SetNeighbor(2, vertex2);
+	vertex4->SetNeighbor(6, vertex6);
+	vertex4->SetNeighbor(8, vertex8);
 
-	vertex5->SetNeighbor(3, vertex2);
-	vertex5->SetNeighbor(5, vertex4);
-	vertex5->SetNeighbor(7, vertex6);
+	vertex5->SetNeighbor(3, vertex3);
+	vertex5->SetNeighbor(5, vertex5);
+	vertex5->SetNeighbor(7, vertex7);
 
-	vertex6->SetNeighbor(6, vertex5);
-	vertex6->SetNeighbor(8, vertex7);
+	vertex6->SetNeighbor(6, vertex6);
+	vertex6->SetNeighbor(8, vertex8);
 
-	vertex7->SetNeighbor(5, vertex4);
-	vertex7->SetNeighbor(7, vertex6);
-	vertex7->SetNeighbor(9, vertex8);
+	vertex7->SetNeighbor(5, vertex5);
+	vertex7->SetNeighbor(7, vertex7);
+	vertex7->SetNeighbor(9, vertex9);
 
-	vertex8->SetNeighbor(8, vertex7);
-	vertex8->SetNeighbor(10, vertex9);
+	vertex8->SetNeighbor(8, vertex8);
+	vertex8->SetNeighbor(10, vertex10);
 	
-	vertex9->SetNeighbor(4, vertex3);
-	vertex9->SetNeighbor(9, vertex8);
+	vertex9->SetNeighbor(4, vertex4);
+	vertex9->SetNeighbor(9, vertex9);
