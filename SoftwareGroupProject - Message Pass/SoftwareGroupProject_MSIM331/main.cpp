@@ -3,6 +3,7 @@
 
 int main()
 {
+	srand(1);
 	ofstream outFile("Statistics.txt");
 
 	int numVertices = 10;
@@ -19,7 +20,6 @@ int main()
 			adjMatrix[i][j] = 0;
 		}
 	}
-
 
 	//vertex edges
 	adjMatrix[0][1] = 1;
@@ -118,6 +118,7 @@ int main()
 
 	RunSimulation();
 	
+	outFile << "Message Passes Wait Times" << endl;
 	vertex0->OutputStatistics();
 	vertex1->OutputStatistics();
 	vertex2->OutputStatistics();

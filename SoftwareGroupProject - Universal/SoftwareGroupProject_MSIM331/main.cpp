@@ -3,7 +3,8 @@
 
 int main()
 {
-	ofstream outFile("Statistics.txt");
+	srand(2);
+	ofstream outFile("Statistics(srand2).txt");
 
 
 	int numVertices = 10;
@@ -119,6 +120,7 @@ int main()
 
 	RunSimulation();
 	
+	outFile << "Universally known Wait Times" << endl;
 	vertex0->OutputStatistics();
 	vertex1->OutputStatistics();
 	vertex2->OutputStatistics();
