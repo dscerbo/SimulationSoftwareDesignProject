@@ -57,12 +57,6 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	numArrivedMessages = 0; 
 	totalWaitTime = 0; 
 
-	///Declare wait time array [i][0] is wait time, [i][0] is time when defined ---not worrying about waittimes----
-	/*for (int i = 0; i < numVertices; ++i) {
-		_waitTimes[i] = new Time[2];
-		_waitTimes[numVertices][0] = _waitTimes[numVertices][1] = 0.0;
-	}*/
-
 	//Declare FIFO queue IDs
 	_queues = new FIFO<Message>[numEdges + 1];
 	int counter = 1; 
@@ -128,9 +122,9 @@ void Node::Arrive(Message *message)
 	}
 	_waitTimes[_ID][0] += _serviceTime->GetMean();
 	_waitTimes[_ID][1] = GetCurrentSimTime();
+
 	//Update last node
 	//Add entity to the correct queue
-
 	if (message->GetLastNode() == -1)
 		_queues[0].AddEntity(message); //Add to Internal Queue
 	else
