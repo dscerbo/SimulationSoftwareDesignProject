@@ -46,7 +46,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	}
 	for (int i = 0; i < numVertices; i++) {
 		for (int j = 0; j < numVertices; j++) {
-			_waitTimes[i][j] = 0; //Initialize all wait times to 0
+			_waitTimes[i][j] = .1; //Initialize all wait times to 0
 		}
 	}
 
@@ -195,7 +195,7 @@ void Node::Serve()
 	message->UpdateTimeSpentWaiting();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Message " << message->GetID() << endl;
 	_state = busy;
-	_serverReserved = false;
+	_serverReserved = true;
 	Time serviceTime = _serviceTime->GetRV();
 	processingTime += serviceTime;
 	ScheduleEventIn(serviceTime, new DepartEvent(this, message));
@@ -207,22 +207,24 @@ void Node::Depart(Message *message)
 	_waitTimes[_ID][1] = GetCurrentSimTime();
 
 	_state = idle;
+	_serverReserved = false;
 
 	if (message->GetDestination() == _ID)
 		Sink(message);
-
 	else
 	{
 		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 		neighors[DetermineNextNode(message)]->Arrive(message);
-		for (int i = 0; i <= _numEdges; i++) {
-			if (!(_queues[currentQueue].IsEmpty()) && (!_serverReserved))
-			{
-				ScheduleEventIn(0, new ServeEvent(this));
-				_serverReserved = true;
-			}
-			currentQueue = (currentQueue + 1) % (_numEdges + 1);
+		
+	}
+
+	for (int i = 0; i <= _numEdges; i++) {
+		if (!(_queues[currentQueue].IsEmpty()) && (!_serverReserved))
+		{
+			ScheduleEventIn(0, new ServeEvent(this));
+			_serverReserved = true;
 		}
+		currentQueue = (currentQueue + 1) % (_numEdges + 1);
 	}
 }
 
@@ -266,7 +268,6 @@ int Node::DetermineNextNode(Message *message)
 	return nextNode;
 }
 
-Time** Node::_waitTimes = new Time*[2];
 
 void Node::Sink(Message *message)
 {

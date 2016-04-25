@@ -14,8 +14,4 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="Simulation.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram11.cd" />
-  </ItemGroup>
 </Project>

@@ -1,0 +1,70 @@
+Message: 4
+Communication Time: 0.901361
+Wait Time: -6.27744e+66
+Message: 1
+Communication Time: 2.56602
+Wait Time: -6.27744e+66
+Message: 7
+Communication Time: 2.69895
+Wait Time: -6.27744e+66
+Message: 5
+Communication Time: 2.70713
+Wait Time: -6.27744e+66
+Message: 10
+Communication Time: 3.54091
+Wait Time: -6.27744e+66
+Message: 8
+Communication Time: 3.58623
+Wait Time: -6.27744e+66
+Message: 3
+Communication Time: 3.69726
+Wait Time: -6.27744e+66
+Message: 2
+Communication Time: 3.84003
+Wait Time: -6.27744e+66
+Message: 9
+Communication Time: 5.51224
+Wait Time: -6.27744e+66
+Message: 6
+Communication Time: 6.35479
+Wait Time: -6.27744e+66
+Node: 0
+Average Processing Time: 0.998086
+Efficency: 0.314121
+Average Wait Time: -6.27744e+66
+Node: 1
+Average Processing Time: 0.838208
+Efficency: 0.527607
+Average Wait Time: -6.27744e+66
+Node: 2
+Average Processing Time: 1.00542
+Efficency: 0.316429
+Average Wait Time: -6.27744e+66
+Node: 3
+Average Processing Time: 0.89618
+Efficency: 0.846146
+Average Wait Time: -6.27744e+66
+Node: 4
+Average Processing Time: 0.892681
+Efficency: 0.280947
+Average Wait Time: -6.27744e+66
+Node: 5
+Average Processing Time: 0.865196
+Efficency: 0.544594
+Average Wait Time: -6.27744e+66
+Node: 6
+Average Processing Time: 0.949123
+Efficency: 0.448066
+Average Wait Time: -6.27744e+66
+Node: 7
+Average Processing Time: 0.885375
+Efficency: 0.139324
+Average Wait Time: -6.27744e+66
+Node: 8
+Average Processing Time: 0.982849
+Efficency: 0.309325
+Average Wait Time: -6.27744e+66
+Node: 9
+Average Processing Time: 0.95158
+Efficency: 0.598969
+Average Wait Time: -6.27744e+66
