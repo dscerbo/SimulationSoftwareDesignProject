@@ -5,7 +5,6 @@ int main()
 {
 	ofstream outFile("Statistics.txt");
 
-
 	int numVertices = 10;
 	//2D array (its an array to pointers to arrays)
 	int **adjMatrix = new int*[numVertices];
@@ -43,6 +42,8 @@ int main()
 	adjMatrix[6][5] = 1;
 	adjMatrix[6][7] = 1;
 	adjMatrix[7][6] = 1;
+	adjMatrix[7][4] = 1;
+	adjMatrix[7][8] = 1;
 	adjMatrix[8][7] = 1;
 	adjMatrix[8][9] = 1;
 	adjMatrix[9][3] = 1;

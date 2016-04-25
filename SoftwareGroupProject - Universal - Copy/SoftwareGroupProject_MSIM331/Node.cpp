@@ -20,7 +20,7 @@ void Node::NextMessage()
 		if (_numMsgs > 0) 
 			_numMsgs--;
 		int randomNode = (_ID + (rand() % _numVertices - 1) + 1) % _numVertices;
-		Message *msg = new Message(randomNode, _numVertices);
+		Message *msg = new Message(randomNode);
 		msg->UpdateLastNode(-1);
 		cout << GetCurrentSimTime() << ", " << _ID << ", NextMessage, Message " << msg->GetID() << ", Destination " << randomNode << endl;
 		this->ScheduleArrivalIn(0, msg);
@@ -46,11 +46,11 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	}
 	for (int i = 0; i < numVertices; i++) {
 		for (int j = 0; j < numVertices; j++) {
-			_waitTimes[i][j] = .1; //Initialize all wait times to 0
+			_waitTimes[i][j] = 0; //Initialize all wait times to 0
 		}
 	}
 
-	_numMsgs = 10;
+	_numMsgs = 5; //For now
 	messagesInQueue = 0;
 	maxQueueSize = 0;
 	processingTime = 0; 
@@ -125,9 +125,8 @@ void Node::Arrive(Message *message)
 
 	//Update last node
 	//Add entity to the correct queue
-	if (message->GetLastNode() == -1) {
+	if (message->GetLastNode() == -1)
 		_queues[0].AddEntity(message); //Add to Internal Queue
-	}
 	else
 	{
 		for (int i = 1; i <= _numEdges; i++) 
@@ -137,14 +136,6 @@ void Node::Arrive(Message *message)
 				_queues[i].AddEntity(message);
 				break;
 			}
-		}
-	}
-	
-	Time** waitTimes = message->GetWaitTime();
-	for (int i = 0; i < _numVertices; i++) {
-		if (_waitTimes[i][1] < waitTimes[i][1]) {
-			_waitTimes[i][1] = waitTimes[i][1];
-			_waitTimes[i][0] = waitTimes[i][1];
 		}
 	}
 
@@ -157,6 +148,12 @@ void Node::Arrive(Message *message)
 		_serverReserved = true;
 	}
 
+	//Update the newest wait times ----Not worrying about wait times right now-----
+	/*for (int i = 0; i < _numEdges; i++) {
+	if (message->UpdateNodeWaitTime()[i][1] > _waitTimes[i][1])
+	_waitTimes[i] = message->UpdateNodeWaitTime()[i];
+	_waitTimes[i] = message->UpdateNodeWaitTime()[i];
+	}*/
 }
 
 void Node::ScheduleArrivalAt(Time time, Message *message)
@@ -198,7 +195,7 @@ void Node::Serve()
 	message->UpdateTimeSpentWaiting();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Message " << message->GetID() << endl;
 	_state = busy;
-	_serverReserved = true;
+	_serverReserved = false;
 	Time serviceTime = _serviceTime->GetRV();
 	processingTime += serviceTime;
 	ScheduleEventIn(serviceTime, new DepartEvent(this, message));
@@ -210,13 +207,12 @@ void Node::Depart(Message *message)
 	_waitTimes[_ID][1] = GetCurrentSimTime();
 
 	_state = idle;
-	_serverReserved = false;
 
 	if (message->GetDestination() == _ID)
 		Sink(message);
+
 	else
 	{
-		message->UpdateMessageWaitTime(_waitTimes);
 		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 		neighors[DetermineNextNode(message)]->Arrive(message);
 		
@@ -272,6 +268,7 @@ int Node::DetermineNextNode(Message *message)
 	return nextNode;
 }
 
+Time** Node::_waitTimes = new Time*[2];
 
 void Node::Sink(Message *message)
 {

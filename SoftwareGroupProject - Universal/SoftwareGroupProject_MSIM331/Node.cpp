@@ -50,7 +50,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 		}
 	}
 
-	_numMsgs = 1; //For now
+	_numMsgs = 10; //For now
 	messagesInQueue = 0;
 	maxQueueSize = 0;
 	processingTime = 0; 
