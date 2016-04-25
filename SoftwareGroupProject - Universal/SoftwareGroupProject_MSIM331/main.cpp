@@ -5,7 +5,7 @@ int main()
 {
 	srand(2);
 	ofstream outFile("Statistics(srand2).txt");
-
+	outFile << "Universally known Wait Times" << endl;
 
 	int numVertices = 10;
 	//2D array (its an array to pointers to arrays)
@@ -120,7 +120,6 @@ int main()
 
 	RunSimulation();
 	
-	outFile << "Universally known Wait Times" << endl;
 	vertex0->OutputStatistics();
 	vertex1->OutputStatistics();
 	vertex2->OutputStatistics();

@@ -5,6 +5,7 @@ int main()
 {
 	srand(1);
 	ofstream outFile("Statistics.txt");
+	outFile << "Message Passes Wait Times" << endl;
 
 	int numVertices = 10;
 	//2D array (its an array to pointers to arrays)
@@ -118,7 +119,6 @@ int main()
 
 	RunSimulation();
 	
-	outFile << "Message Passes Wait Times" << endl;
 	vertex0->OutputStatistics();
 	vertex1->OutputStatistics();
 	vertex2->OutputStatistics();

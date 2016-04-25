@@ -7,6 +7,7 @@ Message::Message(int destination, int numVertices)
 	_id = _nextID++;
 	_destination = destination;
 	_TimeCreated = GetCurrentSimTime();
+	TimeSpentWaiting = 0;
 	_waitTimes = new Time*[numVertices];
 	for (int i = 0; i < numVertices; i++) {
 		_waitTimes[i] = new Time[2];

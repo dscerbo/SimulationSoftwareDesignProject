@@ -1,0 +1,341 @@
+Universally known Wait Times
+Message: 6
+Communication Time: 0.904512
+Wait Time: 0
+Message: 7
+Communication Time: 1.05753
+Wait Time: 0
+Message: 8
+Communication Time: 1.9718
+Wait Time: 0.00202857
+Message: 3
+Communication Time: 2.74355
+Wait Time: 0
+Message: 4
+Communication Time: 3.12653
+Wait Time: 0.232564
+Message: 2
+Communication Time: 4.76748
+Wait Time: 0.289473
+Message: 1
+Communication Time: 4.79411
+Wait Time: 0.423787
+Message: 9
+Communication Time: 4.81372
+Wait Time: 0.300088
+Message: 5
+Communication Time: 5.14252
+Wait Time: 2.28009
+Message: 18
+Communication Time: 2.70197
+Wait Time: 0.836684
+Message: 12
+Communication Time: 3.59363
+Wait Time: 1.05294
+Message: 17
+Communication Time: 3.64593
+Wait Time: 0.774809
+Message: 20
+Communication Time: 3.7931
+Wait Time: 0.778545
+Message: 11
+Communication Time: 4.02577
+Wait Time: 1.28012
+Message: 24
+Communication Time: 1.58963
+Wait Time: 0.707428
+Message: 19
+Communication Time: 4.84588
+Wait Time: 0.795082
+Message: 10
+Communication Time: 8.38711
+Wait Time: 2.77174
+Message: 13
+Communication Time: 5.4318
+Wait Time: 2.78559
+Message: 16
+Communication Time: 5.56538
+Wait Time: 0.963613
+Message: 28
+Communication Time: 3.14785
+Wait Time: 0.510374
+Message: 27
+Communication Time: 3.2439
+Wait Time: 1.29679
+Message: 30
+Communication Time: 3.35072
+Wait Time: 1.40137
+Message: 15
+Communication Time: 6.89114
+Wait Time: 4.19801
+Message: 37
+Communication Time: 2.08978
+Wait Time: 0.171169
+Message: 25
+Communication Time: 5.10125
+Wait Time: 1.34445
+Message: 36
+Communication Time: 2.12166
+Wait Time: 0.284862
+Message: 14
+Communication Time: 8.94929
+Wait Time: 5.4182
+Message: 32
+Communication Time: 3.01331
+Wait Time: 1.40105
+Message: 22
+Communication Time: 6.11067
+Wait Time: 3.46356
+Message: 35
+Communication Time: 3.86859
+Wait Time: 2.11926
+Message: 29
+Communication Time: 8.50433
+Wait Time: 3.77058
+Message: 21
+Communication Time: 8.50791
+Wait Time: 4.78106
+Message: 40
+Communication Time: 5.73279
+Wait Time: 2.94976
+Message: 23
+Communication Time: 8.75266
+Wait Time: 3.97221
+Message: 31
+Communication Time: 6.44671
+Wait Time: 2.78587
+Message: 34
+Communication Time: 6.53514
+Wait Time: 3.80655
+Message: 44
+Communication Time: 3.55079
+Wait Time: 1.8096
+Message: 33
+Communication Time: 6.63502
+Wait Time: 2.9749
+Message: 48
+Communication Time: 4.3486
+Wait Time: 3.46624
+Message: 38
+Communication Time: 7.58465
+Wait Time: 3.72409
+Message: 39
+Communication Time: 7.98345
+Wait Time: 5.13456
+Message: 56
+Communication Time: 2.22024
+Wait Time: 0.446709
+Message: 26
+Communication Time: 11.2804
+Wait Time: 7.69443
+Message: 45
+Communication Time: 6.22549
+Wait Time: 3.58119
+Message: 55
+Communication Time: 3.75361
+Wait Time: 2.01025
+Message: 66
+Communication Time: 0.925277
+Wait Time: 0
+Message: 47
+Communication Time: 7.09471
+Wait Time: 2.26188
+Message: 46
+Communication Time: 7.25054
+Wait Time: 3.68983
+Message: 49
+Communication Time: 8.21794
+Wait Time: 4.52286
+Message: 65
+Communication Time: 2.87467
+Wait Time: 0.10414
+Message: 57
+Communication Time: 6.13095
+Wait Time: 2.21097
+Message: 53
+Communication Time: 6.77715
+Wait Time: 3.02062
+Message: 52
+Communication Time: 6.90499
+Wait Time: 5.00423
+Message: 50
+Communication Time: 10.489
+Wait Time: 5.7237
+Message: 58
+Communication Time: 7.66125
+Wait Time: 3.97727
+Message: 41
+Communication Time: 10.6646
+Wait Time: 5.75169
+Message: 62
+Communication Time: 5.26357
+Wait Time: 3.50849
+Message: 68
+Communication Time: 6.15856
+Wait Time: 3.42239
+Message: 61
+Communication Time: 6.93129
+Wait Time: 4.10627
+Message: 54
+Communication Time: 9.966
+Wait Time: 7.02607
+Message: 43
+Communication Time: 13.3502
+Wait Time: 10.6491
+Message: 78
+Communication Time: 4.47694
+Wait Time: 2.62777
+Message: 60
+Communication Time: 10.9549
+Wait Time: 8.32951
+Message: 59
+Communication Time: 10.989
+Wait Time: 6.11394
+Message: 42
+Communication Time: 14.1329
+Wait Time: 11.6306
+Message: 73
+Communication Time: 5.24366
+Wait Time: 2.55028
+Message: 88
+Communication Time: 2.45016
+Wait Time: 0.644692
+Message: 72
+Communication Time: 5.71225
+Wait Time: 2.98288
+Message: 76
+Communication Time: 5.93406
+Wait Time: 4.13873
+Message: 63
+Communication Time: 9.02352
+Wait Time: 5.3554
+Message: 79
+Communication Time: 6.15359
+Wait Time: 3.29937
+Message: 51
+Communication Time: 12.6565
+Wait Time: 9.07987
+Message: 86
+Communication Time: 4.00185
+Wait Time: 2.10081
+Message: 69
+Communication Time: 10.6219
+Wait Time: 6.75246
+Message: 85
+Communication Time: 4.74958
+Wait Time: 2.94601
+Message: 67
+Communication Time: 10.9733
+Wait Time: 6.37838
+Message: 75
+Communication Time: 9.00948
+Wait Time: 5.39165
+Message: 92
+Communication Time: 3.14729
+Wait Time: 1.22614
+Message: 80
+Communication Time: 9.55856
+Wait Time: 6.64198
+Message: 91
+Communication Time: 3.65091
+Wait Time: 1.8163
+Message: 81
+Communication Time: 6.71096
+Wait Time: 4.72975
+Message: 70
+Communication Time: 12.9531
+Wait Time: 9.29825
+Message: 94
+Communication Time: 4.04473
+Wait Time: 2.18267
+Message: 82
+Communication Time: 7.63613
+Wait Time: 5.99518
+Message: 87
+Communication Time: 7.92233
+Wait Time: 5.08973
+Message: 93
+Communication Time: 5.30236
+Wait Time: 3.47078
+Message: 74
+Communication Time: 11.3037
+Wait Time: 6.67489
+Message: 83
+Communication Time: 8.43255
+Wait Time: 5.69542
+Message: 64
+Communication Time: 14.5107
+Wait Time: 9.6384
+Message: 97
+Communication Time: 5.91803
+Wait Time: 2.97071
+Message: 77
+Communication Time: 12.0318
+Wait Time: 8.13955
+Message: 90
+Communication Time: 9.10739
+Wait Time: 6.41468
+Message: 71
+Communication Time: 12.2283
+Wait Time: 7.47879
+Message: 89
+Communication Time: 9.49358
+Wait Time: 5.51369
+Message: 84
+Communication Time: 9.98607
+Wait Time: 8.24965
+Message: 100
+Communication Time: 7.11362
+Wait Time: 4.3259
+Message: 99
+Communication Time: 8.0709
+Wait Time: 3.45999
+Message: 95
+Communication Time: 8.84019
+Wait Time: 6.12784
+Message: 96
+Communication Time: 11.026
+Wait Time: 6.21746
+Message: 98
+Communication Time: 11.9549
+Wait Time: 7.11362
+Node: 0
+Average Processing Time: 1.00478
+Efficency: 0.722217
+Average Wait Time: 2.18242
+Node: 1
+Average Processing Time: 0.800455
+Efficency: 0.883575
+Average Wait Time: 0.785303
+Node: 2
+Average Processing Time: 0.996429
+Efficency: 0.716213
+Average Wait Time: 1.59059
+Node: 3
+Average Processing Time: 0.895596
+Efficency: 0.850652
+Average Wait Time: 1.21747
+Node: 4
+Average Processing Time: 0.90552
+Efficency: 0.65087
+Average Wait Time: 1.41819
+Node: 5
+Average Processing Time: 0.888082
+Efficency: 0.752324
+Average Wait Time: 1.39894
+Node: 6
+Average Processing Time: 0.994714
+Efficency: 0.561771
+Average Wait Time: 1.35868
+Node: 7
+Average Processing Time: 0.894962
+Efficency: 0.918973
+Average Wait Time: 1.29311
+Node: 8
+Average Processing Time: 1.0058
+Efficency: 0.826227
+Average Wait Time: 1.70599
+Node: 9
+Average Processing Time: 0.995354
+Efficency: 0.792095
+Average Wait Time: 1.65852

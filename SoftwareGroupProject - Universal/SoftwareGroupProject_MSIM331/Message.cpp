@@ -7,6 +7,7 @@ Message::Message(int destination)
 	_id = _nextID++;
 	_destination = destination;
 	_TimeCreated = GetCurrentSimTime();
+	TimeSpentWaiting = 0; 
 }
 
 Message::~Message()
