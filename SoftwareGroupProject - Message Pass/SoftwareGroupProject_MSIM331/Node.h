@@ -27,6 +27,8 @@ private:
 	int currentQueue; 
 	Node **neighors;
 	int messagesInQueue;
+	double averageMessagesInQueue;
+	Time lastReading;
 	int maxQueueSize;
 	Time processingTime;
 	int numArrivedMessages;

@@ -3,8 +3,8 @@
 
 int main()
 {
-	srand(1);
-	ofstream outFile("Statistics.txt");
+	srand(3);
+	ofstream outFile("Statistics(srand3).txt");
 	outFile << "Message Passes Wait Times" << endl;
 
 	int numVertices = 10;
@@ -51,28 +51,28 @@ int main()
 	adjMatrix[9][8] = 1;
 
 	//=== Vertex 0 === Node 1
-	Node *vertex0 = new Node(0, new Triangular(0.9, 1.0, 1.1), new Constant(3.0), adjMatrix, 10, 2, outFile);
+	Node *vertex0 = new Node(0, new Triangular(0.9, 1.0, 1.1), new Constant(.5), adjMatrix, 10, 2, outFile);
 
 	//===Vertex 1=== Node 2
-	Node *vertex1 = new Node(1, new Triangular(0.7, 0.8, 0.9), new Constant(3.0), adjMatrix, 10, 4, outFile);
+	Node *vertex1 = new Node(1, new Triangular(0.7, 0.8, 0.9), new Constant(.5), adjMatrix, 10, 4, outFile);
 
 	//===Vertex 2=== Node 3
-	Node *vertex2 = new Node(2, new Triangular(0.9, 1.0, 1.1), new Constant(3.0), adjMatrix, 10, 2, outFile);
+	Node *vertex2 = new Node(2, new Triangular(0.9, 1.0, 1.1), new Constant(.5), adjMatrix, 10, 2, outFile);
 
 	//===Vertex 3=== Node 4
-	Node *vertex3 = new Node(3, new Triangular(0.8, 0.9, 1.0), new Constant(3.0), adjMatrix, 10, 3, outFile);
+	Node *vertex3 = new Node(3, new Triangular(0.8, 0.9, 1.0), new Constant(.5), adjMatrix, 10, 3, outFile);
 
 	//===Vertex 4=== Node 5
-	Node *vertex4 = new Node(4, new Triangular(0.8, 0.9, 1.0), new Constant(3.0), adjMatrix, 10, 3, outFile);
+	Node *vertex4 = new Node(4, new Triangular(0.8, 0.9, 1.0), new Constant(.5), adjMatrix, 10, 3, outFile);
 
 	//===Vertex 5=== Node 6
-	Node *vertex5 = new Node(5, new Triangular(0.8, 0.9, 1.0), new Constant(3.0), adjMatrix, 10, 3, outFile);
+	Node *vertex5 = new Node(5, new Triangular(0.8, 0.9, 1.0), new Constant(.5), adjMatrix, 10, 3, outFile);
 
 	//===Vertex 6=== Node 7
-	Node *vertex6 = new Node(6, new Triangular(0.9, 1.0, 1.1), new Constant(3.0), adjMatrix, 10, 2, outFile);
+	Node *vertex6 = new Node(6, new Triangular(0.9, 1.0, 1.1), new Constant(.5), adjMatrix, 10, 2, outFile);
 
 	//===Vertex 7=== Node 8
-	Node *vertex7 = new Node(7, new Triangular(0.8, 0.9, 1.0), new Constant(3.0), adjMatrix, 10, 3, outFile);
+	Node *vertex7 = new Node(7, new Triangular(0.8, 0.9, 1.0), new Constant(.5), adjMatrix, 10, 3, outFile);
 	
 	//===Vertex 8=== Node 9
 	Node *vertex8 = new Node(8, new Triangular(0.9, 1.0, 1.1), new Constant(3.0), adjMatrix, 10, 2, outFile);

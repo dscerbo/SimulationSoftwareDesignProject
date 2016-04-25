@@ -50,8 +50,10 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 		}
 	}
 
-	_numMsgs = 10; //For now
+	_numMsgs = 10; 
 	messagesInQueue = 0;
+	averageMessagesInQueue = 0.0;
+	lastReading = 0.0;
 	maxQueueSize = 0;
 	processingTime = 0; 
 	numArrivedMessages = 0; 
@@ -113,15 +115,18 @@ private:
 
 void Node::Arrive(Message *message)
 {
-	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Arrive, Message " << message->GetID() << endl;
+	Time currentSimTime = GetCurrentSimTime();
+	cout << currentSimTime << ", SSSQ " << _ID << ", Arrive, Message " << message->GetID() << endl;
 	//count nmber of messages and then update current wait time at the node
 	messagesInQueue++;
+	averageMessagesInQueue = messagesInQueue * (currentSimTime - lastReading);
+	lastReading = currentSimTime;
 	numArrivedMessages++; 
 	if (messagesInQueue > maxQueueSize) {
 		maxQueueSize = messagesInQueue;
 	}
 	_waitTimes[_ID][0] += _serviceTime->GetMean();
-	_waitTimes[_ID][1] = GetCurrentSimTime();
+	_waitTimes[_ID][1] = currentSimTime;
 
 	//Update last node
 	//Add entity to the correct queue
@@ -286,8 +291,9 @@ void Node::OutputStatistics() {
 	Time AverageProcessingTime = processingTime / numArrivedMessages;
 	Time Efficency = processingTime / GetCurrentSimTime();
 	Time AverageWaitTime = totalWaitTime / numArrivedMessages;
-	*_outFile << "Node: " << _ID << endl
+	*_outFile << "Node - " << _ID << endl
 		<< "Average Processing Time: " << AverageProcessingTime << endl
 		<< "Efficency: " << Efficency << endl
-		<< "Average Wait Time: " << AverageWaitTime << endl;
+		<< "Average Wait Time: " << AverageWaitTime << endl
+		<< "Average Messages in Queue: " << averageMessagesInQueue;
 }

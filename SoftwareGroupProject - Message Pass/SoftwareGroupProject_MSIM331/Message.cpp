@@ -67,7 +67,7 @@ Time Message::GetTimeSpentWaiting() {
 
 void Message::OutputStatistics(std::ofstream& outFile) {
 	Time communicationTime = GetCurrentSimTime() - _TimeCreated;
-	outFile << "Message: " << _id << std::endl
+	outFile << "Message - " << _id << std::endl
 		<< "Communication Time: " << communicationTime << std::endl
 		<< "Wait Time: " << TimeSpentWaiting << std::endl;
 }
