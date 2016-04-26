@@ -20,7 +20,7 @@ void Node::NextMessage()
 		if (_numMsgs > 0) 
 			_numMsgs--;
 		int randomNode = (_ID + (rand() % _numVertices - 1) + 1) % _numVertices;
-		Message *msg = new Message(randomNode);
+		Message *msg = new Message(randomNode, _numVertices);
 		msg->UpdateLastNode(-1);
 		cout << GetCurrentSimTime() << ", " << _ID << ", NextMessage, Message " << msg->GetID() << ", Destination " << randomNode << endl;
 		this->ScheduleArrivalIn(0, msg);
@@ -46,11 +46,11 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 	}
 	for (int i = 0; i < numVertices; i++) {
 		for (int j = 0; j < numVertices; j++) {
-			_waitTimes[i][j] = 0; //Initialize all wait times to 0
+			_waitTimes[i][j] = .1; //Initialize all wait times to 0
 		}
 	}
 
-	_numMsgs = 10; 
+	_numMsgs = 100;
 	messagesInQueue = 0;
 	averageMessagesInQueue = 0.0;
 	lastReading = 0.0;
@@ -118,20 +118,24 @@ void Node::Arrive(Message *message)
 	Time currentSimTime = GetCurrentSimTime();
 	cout << currentSimTime << ", SSSQ " << _ID << ", Arrive, Message " << message->GetID() << endl;
 	//count nmber of messages and then update current wait time at the node
-	messagesInQueue++;
-	averageMessagesInQueue = messagesInQueue * (currentSimTime - lastReading);
+	averageMessagesInQueue += (messagesInQueue * (currentSimTime - lastReading));
 	lastReading = currentSimTime;
-	numArrivedMessages++; 
+	messagesInQueue++;
+	numArrivedMessages++;
 	if (messagesInQueue > maxQueueSize) {
 		maxQueueSize = messagesInQueue;
 	}
 	_waitTimes[_ID][0] += _serviceTime->GetMean();
 	_waitTimes[_ID][1] = currentSimTime;
 
+	message->UpdateEnteredQueue();
+
+
 	//Update last node
 	//Add entity to the correct queue
-	if (message->GetLastNode() == -1)
+	if (message->GetLastNode() == -1) {
 		_queues[0].AddEntity(message); //Add to Internal Queue
+	}
 	else
 	{
 		for (int i = 1; i <= _numEdges; i++) 
@@ -144,21 +148,12 @@ void Node::Arrive(Message *message)
 		}
 	}
 
-	message->UpdateLastNode(_ID);
-	message->UpdateEnteredQueue();
-
 	if ((_state == idle) && (!_serverReserved)) 
 	{
 		ScheduleEventIn(0, new ServeEvent(this));
 		_serverReserved = true;
 	}
 
-	//Update the newest wait times ----Not worrying about wait times right now-----
-	/*for (int i = 0; i < _numEdges; i++) {
-	if (message->UpdateNodeWaitTime()[i][1] > _waitTimes[i][1])
-	_waitTimes[i] = message->UpdateNodeWaitTime()[i];
-	_waitTimes[i] = message->UpdateNodeWaitTime()[i];
-	}*/
 }
 
 void Node::ScheduleArrivalAt(Time time, Message *message)
@@ -195,12 +190,16 @@ void Node::Serve()
 		currentQueue = (currentQueue + 1) % (_numEdges + 1); 
 	}
 	Message *message = _queues[currentQueue].GetEntity();
+
 	totalWaitTime += message->GetTimeSpentWaiting();
+	averageMessagesInQueue += (messagesInQueue * (GetCurrentSimTime() - lastReading));
+	lastReading = GetCurrentSimTime();
 	messagesInQueue--;
+
 	message->UpdateTimeSpentWaiting();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Message " << message->GetID() << endl;
 	_state = busy;
-	_serverReserved = false;
+	_serverReserved = true;
 	Time serviceTime = _serviceTime->GetRV();
 	processingTime += serviceTime;
 	ScheduleEventIn(serviceTime, new DepartEvent(this, message));
@@ -212,12 +211,15 @@ void Node::Depart(Message *message)
 	_waitTimes[_ID][1] = GetCurrentSimTime();
 
 	_state = idle;
+	_serverReserved = false;
 
-	if (message->GetDestination() == _ID)
+	if (message->GetDestination() == _ID) {
+		message->OutputStatistics(*_outFile);
 		Sink(message);
-
+	}
 	else
 	{
+		message->UpdateLastNode(_ID);
 		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 		neighors[DetermineNextNode(message)]->Arrive(message);
 		
@@ -273,12 +275,10 @@ int Node::DetermineNextNode(Message *message)
 	return nextNode;
 }
 
-Time** Node::_waitTimes = new Time*[2];
 
 void Node::Sink(Message *message)
 {
 	cout << GetCurrentSimTime() << ", Node " << _ID << ", Sink, Message " << message->GetID() << endl;
-	message->OutputStatistics(*_outFile);
 	delete message;
 }
 
@@ -295,5 +295,7 @@ void Node::OutputStatistics() {
 		<< "Average Processing Time: " << AverageProcessingTime << endl
 		<< "Efficency: " << Efficency << endl
 		<< "Average Wait Time: " << AverageWaitTime << endl
-		<< "Average Messages in Queue: " << averageMessagesInQueue;
+		<< "Average Messages in Queue: " << averageMessagesInQueue / GetCurrentSimTime() << endl;
 }
+
+Time** Node::_waitTimes = new Time*[2];

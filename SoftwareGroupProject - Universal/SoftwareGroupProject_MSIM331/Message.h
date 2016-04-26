@@ -6,14 +6,14 @@
 class Message
 {
 public:
-	Message(int destination);
-	Message *New(int destination)
+	Message(int destination, int numVertices);
+	Message *New(int destination, int numVertices)
 	{
-		return new Message(destination);
+		return new Message(destination, numVertices);
 	}
 	int GetID();
 	//void UpdateMessageWaitTime(Time **waitTimes); 
-	//Time **UpdateNodeWaitTime(); 
+	//Time **GetWaitTime(); 
 	void UpdateEnteredQueue();
 	void UpdateTimeSpentWaiting();
 	int GetLastNode(); 
@@ -31,5 +31,6 @@ private:
 	int _id;
 	int _destination;
 	static int _nextID;
-	//Time **_waitTimes; 
+	int _numVertices;
+	Time **_waitTimes; 
 };

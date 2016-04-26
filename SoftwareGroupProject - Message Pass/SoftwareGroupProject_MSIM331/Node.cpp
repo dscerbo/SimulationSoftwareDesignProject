@@ -50,7 +50,7 @@ Node::Node(int ID, Distribution *serviceTime, Distribution *generationRate, int 
 		}
 	}
 
-	_numMsgs = 10;
+	_numMsgs = 100;
 	messagesInQueue = 0;
 	averageMessagesInQueue = 0.0;
 	lastReading = 0.0;
@@ -118,15 +118,17 @@ void Node::Arrive(Message *message)
 	Time currentSimTime = GetCurrentSimTime();
 	cout << currentSimTime << ", SSSQ " << _ID << ", Arrive, Message " << message->GetID() << endl;
 	//count nmber of messages and then update current wait time at the node
-	messagesInQueue++;
-	averageMessagesInQueue = messagesInQueue * (currentSimTime - lastReading);
+	averageMessagesInQueue += (messagesInQueue * (currentSimTime - lastReading));
 	lastReading = currentSimTime;
+	messagesInQueue++;
 	numArrivedMessages++;
 	if (messagesInQueue > maxQueueSize) {
 		maxQueueSize = messagesInQueue;
 	}
 	_waitTimes[_ID][0] += _serviceTime->GetMean();
 	_waitTimes[_ID][1] = currentSimTime;
+
+	message->UpdateEnteredQueue();
 
 
 	//Update last node
@@ -154,8 +156,6 @@ void Node::Arrive(Message *message)
 		}
 	}
 
-	message->UpdateLastNode(_ID);
-	message->UpdateEnteredQueue();
 
 	if ((_state == idle) && (!_serverReserved)) 
 	{
@@ -199,8 +199,12 @@ void Node::Serve()
 		currentQueue = (currentQueue + 1) % (_numEdges + 1); 
 	}
 	Message *message = _queues[currentQueue].GetEntity();
+
 	totalWaitTime += message->GetTimeSpentWaiting();
+	averageMessagesInQueue += (messagesInQueue * (GetCurrentSimTime() - lastReading));
+	lastReading = GetCurrentSimTime();
 	messagesInQueue--;
+
 	message->UpdateTimeSpentWaiting();
 	cout << GetCurrentSimTime() << ", SSSQ " << _ID << ", Serve, Message " << message->GetID() << endl;
 	_state = busy;
@@ -222,6 +226,7 @@ void Node::Depart(Message *message)
 		Sink(message);
 	else
 	{
+		message->UpdateLastNode(_ID);
 		message->UpdateMessageWaitTime(_waitTimes);
 		cout << GetCurrentSimTime() << ", Node " << _ID << ", Depart, Message " << message->GetID();
 		neighors[DetermineNextNode(message)]->Arrive(message);
@@ -298,5 +303,6 @@ void Node::OutputStatistics() {
 	*_outFile << "Node - " << _ID << endl
 		<< "Average Processing Time: " << AverageProcessingTime << endl
 		<< "Efficency: " << Efficency << endl
-		<< "Average Wait Time: " << AverageWaitTime << endl;
+		<< "Average Wait Time: " << AverageWaitTime << endl
+		<< "Average Messages in Queue: " << averageMessagesInQueue / GetCurrentSimTime() << endl;
 }

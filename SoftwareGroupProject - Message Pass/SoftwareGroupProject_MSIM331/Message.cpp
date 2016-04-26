@@ -62,7 +62,7 @@ void Message::UpdateTimeSpentWaiting() {
 }
 
 Time Message::GetTimeSpentWaiting() {
-	return TimeSpentWaiting;
+	return (GetCurrentSimTime() - _enteredQueue);
 }
 
 void Message::OutputStatistics(std::ofstream& outFile) {
